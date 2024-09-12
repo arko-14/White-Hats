@@ -2,8 +2,8 @@ import serial
 import time
 
 # Initialize serial communication with Arduino
-#ser = serial.Serial('COM3', 9600)  # Replace 'COM3' with your Arduino port
-#time.sleep(2)  # Wait for the connection to establish
+ser = serial.Serial('COM3', 9600)  # Replace 'COM3' with your Arduino port
+time.sleep(2)  # Wait for the connection to establish
 
 # Define the binary representations for each letter
 braileMap = {
@@ -31,18 +31,18 @@ braille_numbers = [
 def display_number(number):
     # Display number sign first (⠼)
     number_sign = '001111'  # ⠼
-    #ser.write(number_sign.encode())  # Send number sign pattern
+    ser.write(number_sign.encode())  # Send number sign pattern
     time.sleep(0.5)  # Short delay to distinguish the number sign
 
     # Display the actual number in Braille
     braille_pattern = braille_numbers[number]
-    #ser.write(braille_pattern.encode())  # Send the Braille pattern
+    ser.write(braille_pattern.encode())  # Send the Braille pattern
     print(f"Sent number {number}: {braille_pattern}")
 
 def send_letter(letter):
     if letter in braileMap:
         binary_code = braileMap[letter]
-        #ser.write(binary_code.encode())
+        ser.write(binary_code.encode())
         print(f"Sent {letter}: {binary_code}")
     else:
         print("Invalid letter")
