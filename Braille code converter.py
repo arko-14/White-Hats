@@ -2,8 +2,9 @@ import serial
 import time
 
 # Initialize serial communication with Arduino
-ser = serial.Serial('COM3', 9600)  # Replace 'COM3' with your Arduino port
+ser = serial.Serial('COM9', 9600)  # Replace 'COM3' with your Arduino port
 time.sleep(2)  # Wait for the connection to establish
+
 
 # Define the binary representations for each letter
 braileMap = {
@@ -15,40 +16,71 @@ braileMap = {
 }
 
 # Define the Braille patterns for 0-9
-braille_numbers = [
-    '100110',  # 0 (⠚)
-    '100000',  # 1 (⠁)
-    '110000',  # 2 (⠃)
-    '100100',  # 3 (⠉)
-    '100110',  # 4 (⠙)
-    '100010',  # 5 (⠑)
-    '110100',  # 6 (⠋)
-    '110110',  # 7 (⠛)
-    '110010',  # 8 (⠓)
-    '100100'   # 9 (⠊)
-]
+braille_numbers = {
+    '0':'100110',  # 0 (⠚)
+    '1':'100000',  # 1 (⠁)
+    '2':'110000',  # 2 (⠃)
+    '3':'100100',  # 3 (⠉)
+    '4':'100110',  # 4 (⠙)
+    '5':'100010',  # 5 (⠑)
+    '6':'110100',  # 6 (⠋)
+    '7':'110110',  # 7 (⠛)
+    '8':'110010',  # 8 (⠓)
+    '9':'100100'   # 9 (⠊)
+}
 
-def display_number(number):
-    # Display number sign first (⠼)
-    number_sign = '001111'  # ⠼
-    ser.write(number_sign.encode())  # Send number sign pattern
-    time.sleep(0.5)  # Short delay to distinguish the number sign
 
-    # Display the actual number in Braille
-    braille_pattern = braille_numbers[number]
-    ser.write(braille_pattern.encode())  # Send the Braille pattern
-    print(f"Sent number {number}: {braille_pattern}")
+#to decide whether the character coming is letter or number
 
-def send_letter(letter):
-    if letter in braileMap:
-        binary_code = braileMap[letter]
-        ser.write(binary_code.encode())
-        print(f"Sent {letter}: {binary_code}")
-    else:
-        print("Invalid letter")
+if braileMap:
+    def send_letter(letter):
+        if  letter in braileMap:
+            binary_code = braileMap[letter]
+            ser.write(binary_code.encode())
+            print(f"Sent {letter}: {binary_code}")
 
-# Example usage: Display the number 3
-display_number(3)
+        else:
+            print("Invalid letter")    
+        
+#time.sleep(0.5)
 
-# Example usage: Send a letter 'A'
-send_letter('B')
+
+    def send_number(numbers):
+        if numbers in braille_numbers:
+            number_sign = '001111'  
+            ser.write(number_sign.encode())  # Send number sign pattern
+            print(number_sign)
+            time.sleep(1)
+            binary_number = braille_numbers[numbers]
+            ser.write(binary_number.encode())
+            print(f"Sent { numbers }:{ binary_number }")
+
+        
+        else:
+            print("Invalid number")
+
+
+
+
+
+B = input('input letter or integer = ')
+if B.isalpha():
+    send_letter(B)
+else:
+    time.sleep(0.5)
+    send_number(B)
+
+#send_letter(B)
+#time.sleep(0.5)
+#send_number('0')
+
+
+
+   
+
+
+
+
+
+
+
