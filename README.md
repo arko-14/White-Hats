@@ -18,7 +18,7 @@ The idea revolves around developing a prototype device that converts visual elem
 
 
 
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 (Software) [involves these file 2VisionVoice.py, 1quadrant.py]
 only for Blind (open cv – tesseract – speaker) 
@@ -26,14 +26,18 @@ Surrounding input signals to Speaker (earphone)
 
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 (Software) [involves these file 3SignSpeak.py]
 only for Dumb (opencv, numpy, mediapipe)
 Sign Language to Text Translate to Speaker
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 (Software) [involves these file 4TextTalk.py]
 only for Deaf (opencv, numpy, mediapipe)
 Speech to Text Converter for deaf Individuals
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
